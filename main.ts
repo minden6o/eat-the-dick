@@ -1,14 +1,14 @@
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
-    mySprite.sayText("szar", 5000, false)
+    mySprite.sayText("nuni", 5000, false)
     scene.cameraShake(4, 500)
-    otherSprite.destroy(effects.bubbles)
+    otherSprite.destroy(effects.fire)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
-    mySprite.sayText("fasz", 5000, false)
+    mySprite.sayText("kuki", 5000, false)
     otherSprite.destroy()
-    sprite.startEffect(effects.hearts, 100)
+    sprite.startEffect(effects.spray, 100)
     music.baDing.play()
 })
 let projectile: Sprite = null
@@ -36,46 +36,27 @@ mySprite = sprites.create(img`
 controller.moveSprite(mySprite, 100, 100)
 mySprite.setStayInScreen(true)
 info.setLife(5)
-game.onUpdateInterval(500, function () {
-    choice = randint(1, 3)
+game.onUpdateInterval(200, function () {
+    choice = randint(0, 1)
     if (choice == 1) {
         projectile = sprites.createProjectileFromSide(img`
-            . . . . . . . . . . . . . . . . 
-            . . . d d d d d d d . . . . . . 
-            . . d d d d d d d d d . . . . . 
-            . d d d d d d d d d d d . . . . 
-            d d d d e e e e e d d d d . . . 
-            d d d e 3 3 3 3 3 e d d d . . . 
-            d d d e 3 3 3 3 3 e d d d . . . 
-            d d d e 3 3 e 3 3 e d d d . . . 
-            d d d e 3 3 3 3 3 e d d d . . . 
-            d d d e 3 3 3 3 3 e d d d . . . 
-            d d d d e e e e e d d d d . . . 
-            . d d d d d d d d d d d . . . . 
-            . . d d d d d d d d d . . . . . 
-            . . . d d d d d d d . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
+            . . . . . . . 3 . . . . . . . . 
+            . . . . . . 3 d 3 . . . . . . . 
+            . . . . . 3 d d d 3 . . . . . . 
+            . . . . 3 d d d d d 3 . . . . . 
+            . . . . 3 d d d d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d 3 d d 3 . . . . . 
+            . . . . 3 d d d d d 3 . . . . . 
+            . . . . 3 d d d d d 3 . . . . . 
+            . . . . . 3 d d d 3 . . . . . . 
+            . . . . . . 3 d 3 . . . . . . . 
+            . . . . . . . 3 . . . . . . . . 
             `, -60, 0)
-    } else if (choice == 2) {
-        projectile = sprites.createProjectileFromSide(img`
-            . . . . . . . 3 . . . . . . . . 
-            . . . . . . 3 d 3 . . . . . . . 
-            . . . . . 3 d d d 3 . . . . . . 
-            . . . . 3 d d d d d 3 . . . . . 
-            . . . . 3 d d d d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d 3 d d 3 . . . . . 
-            . . . . 3 d d d d d 3 . . . . . 
-            . . . . 3 d d d d d 3 . . . . . 
-            . . . . . 3 d d d 3 . . . . . . 
-            . . . . . . 3 d 3 . . . . . . . 
-            . . . . . . . 3 . . . . . . . . 
-            `, 60, 0)
     } else {
         projectile = sprites.createProjectileFromSide(img`
             . . . . 3 3 e 3 3 . . . . . . . 

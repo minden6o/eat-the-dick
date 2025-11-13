@@ -1,11 +1,13 @@
 def on_on_overlap(sprite, otherSprite):
     info.change_life_by(-1)
+    mySprite.say_text("szar", 5000, False)
     scene.camera_shake(4, 500)
     otherSprite.destroy(effects.bubbles)
 sprites.on_overlap(SpriteKind.player, SpriteKind.projectile, on_on_overlap)
 
 def on_on_overlap2(sprite2, otherSprite2):
     info.change_score_by(1)
+    mySprite.say_text("fasz", 5000, False)
     otherSprite2.destroy()
     sprite2.start_effect(effects.hearts, 100)
     music.ba_ding.play()
@@ -13,6 +15,7 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap2)
 
 projectile: Sprite = None
 choice = 0
+mySprite: Sprite = None
 scene.set_background_color(8)
 mySprite = sprites.create(img("""
         . . . . . . . . . . . . . . . .
